@@ -5,7 +5,8 @@ import HomeContainer from './components/tabbar/HomeContainer.vue'
 import SearchContainer from './components/tabbar/SearchContainer.vue'
 import shopContainer from './components/tabbar/shopcarContainer.vue'
 import VIPContainer from './components/tabbar/VIPContainer.vue'
-
+import Newslist from './components/news/Newlist.vue'
+import Newinfo from './components/news/Newinfo.vue'
 
 // 3. 创建路由对象
 var router = new VueRouter({
@@ -30,6 +31,15 @@ var router = new VueRouter({
             path: '/VIP',
             component: VIPContainer
         },
+        {
+            path: '/home/newslist',
+            component: Newslist
+        },
+        {
+            path: '/newlist/newsinfo/',
+            component: Newinfo
+
+        }
 
 
     ],
