@@ -11,7 +11,13 @@ import app from './App.vue'
 
 import './lib/mui/css/mui.min.css'
 
+
+
+
 import './lib/mui/css/icons-extra.css'
+
+
+
 
 
 import VueResource from 'vue-resource'
@@ -19,24 +25,38 @@ import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
 Vue.http.options.root = 'http://api.cms.liulongbin.top/'
-
-
+//全局设置post时表单提交的格式
+Vue.http.options.emulateJSON = true
 
 
 import {
     Header,
     Swipe,
     SwipeItem,
-    Button
+    Button,
+    Lazyload
+
 } from 'mint-ui'
 
 Vue.component(Header.name, Header)
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)
 Vue.component(Button.name, Button)
+Vue.use(Lazyload);
 
 //1.3导入自己的router.js路由模块
 import router from './router.js'
+
+// 缩略图
+import VuePreview from 'vue-preview'
+
+// defalut install
+Vue.use(VuePreview)
+
+
+
+// 缩略图------end
+
 
 //{{ date | dateFormat('yyyy-mm-dd') }} 不填默认 yyyy-mm-dd hh-mm-ss
 // 过滤器， 进行时间的格式化

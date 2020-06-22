@@ -7,13 +7,19 @@ import shopContainer from './components/tabbar/shopcarContainer.vue'
 import VIPContainer from './components/tabbar/VIPContainer.vue'
 import Newslist from './components/news/Newlist.vue'
 import Newinfo from './components/news/Newinfo.vue'
+import Photoes from './components/photoes/photoes.vue'
+import photoesinfo from './components/photoes/photoesinfo.vue'
+import shopping from './components/shopping/shopping.vue'
+
+
+
 
 // 3. 创建路由对象
 var router = new VueRouter({
     routes: [ //配置路由规则
         {
             path: '/',
-            redirect: HomeContainer
+            redirect: '/home'
         },
         {
             path: '/home',
@@ -39,6 +45,18 @@ var router = new VueRouter({
             path: '/newlist/newsinfo/',
             component: Newinfo
 
+        }, {
+            path: '/home/photoes/',
+            component: Photoes
+
+        },
+        {
+            path: '/home/photoesinfo/:id',
+            component: photoesinfo
+        },
+        {
+            path: '/home/shopping/',
+            component: shopping
         }
 
 

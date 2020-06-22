@@ -2,8 +2,8 @@
   <div class="contaniner">
     <h3 class="pl_title">发表评论</h3>
     <br />
-    <textarea name id cols="10" rows="6" placeholder="请输入你想评论的内容"></textarea>
-    <mt-button type="primary" size="large">发表评论</mt-button>
+    <textarea name id cols="10" rows="6" placeholder="请输入你想评论的内容" v-model="msg"></textarea>
+    <mt-button type="primary" size="large" @click="postmsg">发表评论</mt-button>
     <div>
       <div v-for="(item, index) in commentes" :key="item.add_time" class="container_c">
         <div>第{{index+1}}楼 用户:{{item.user_name}} 发表时间:{{item.add_time|dateFormat}}</div>
@@ -16,11 +16,13 @@
 </template>
 
 <script>
+import { Toast } from "mint-ui";
 export default {
   data() {
     return {
       commentes: [],
-      pageIndex: 1
+      pageIndex: 1,
+      msg: ""
     };
   },
   created() {
@@ -41,7 +43,7 @@ export default {
               //   this.commentes = result.body.message;
               // concat可以保存老数据+加新数据
               this.commentes = this.commentes.concat(result.body.message);
-              //   console.log(this.commentes);
+              console.log(this.commentes);
             }
           },
           result => {
@@ -68,6 +70,35 @@ export default {
     more() {
       this.pageIndex = this.pageIndex + 1;
       this.getComment();
+    },
+    postmsg() {
+      if (this.msg.trim().length === 0) {
+        return Toast("评论为空");
+      }
+      this.$http
+        .get("api/postcomment/" + this.id, {
+          content: this.msg.trim()
+        })
+        .then(
+          result => {
+            var cmt = {
+              user_name: "匿名用户1",
+              add_time: Date.now(),
+              content: this.msg.trim()
+            };
+            this.commentes.unshift(cmt);
+            this.msg = "";
+          },
+          result => {
+            var cmt = {
+              user_name: "匿名用户2",
+              add_time: Date.now(),
+              content: this.msg.trim()
+            };
+            this.commentes.unshift(cmt);
+            this.msg = "";
+          }
+        );
     }
   },
   props: ["id"]

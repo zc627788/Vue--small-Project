@@ -15,18 +15,18 @@
         </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-        <a href="#">
+        <router-link to="/home/photoes">
           <img src="../../images/menu2.png" alt />
 
           <div class="mui-media-body">图片分享</div>
-        </a>
+        </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-        <a href="#">
+        <router-link to="/home/shopping" href="#">
           <img src="../../images/menu3.png" alt />
 
           <div class="mui-media-body">商品购买</div>
-        </a>
+        </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
         <a href="#">
@@ -103,8 +103,8 @@ img {
   height: 60px;
 }
 .swing {
-  width: 375.2px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
 }
 </style>
 
