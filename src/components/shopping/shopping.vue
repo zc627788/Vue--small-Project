@@ -1,23 +1,22 @@
 <template>
   <div class="flex1">
-    <div class="list1">
-      <img
-        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/afa28e7477639537f556eb46e3ca5f43.jpeg"
-        alt
-      />
-      <h1>小米node5 16G</h1>
+    <div class="list1" v-for="item in  shopping" :key="item.id" @click="shoppinginfo(item.id)">
+      <img :src="item.img_url" alt />
+      <h1>{{item.title}}</h1>
       <div class="bg">
         <div class="filex2">
-          <p>$899</p>
-          <p>$999</p>
+          <p>{{item.sell_price}}</p>
+          <p>{{item.market_price}}</p>
         </div>
         <div class="filex3">
           <p>热卖中</p>
-          <p>剩余60件</p>
+          <p>剩余{{item.stock_quantity}}件</p>
         </div>
       </div>
     </div>
-    <div class="list1">
+    <mt-button size="large" type="danger" @click="next()">加载更多</mt-button>
+
+    <!-- <div class="list1">
       <img
         src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/afa28e7477639537f556eb46e3ca5f43.jpeg"
         alt
@@ -50,13 +49,52 @@
           <p>剩余60件</p>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      item: 1,
+      shopping: []
+    };
+  },
+  created() {
+    this.getshopping();
+  },
+  methods: {
+    getshopping() {
+      //从api获取每一张图片
+      this.$http.get("api/getgoods?pageindex=" + this.item).then(
+        result => {
+          if (result.body.status === 0) {
+            this.shopping = this.shopping.concat(result.body.message);
+          }
+        },
+        // 为什么防止api失效返回的值
+        result => {}
+      );
+    },
+    next() {
+      this.item++;
+      this.getshopping();
+    },
+    shoppinginfo(id) {
+      // 可以通过两种方式去跳转页面
+      // 1通过a链接 在vue中就是 改变 router-link
+      // 2.通过js的形式 在函数中调用this.$router.push("路由路径"+参数)
+      // $route是处理 $route.params $route.query 这两种去查找 url路径的参数的
+      // $router是解决相关路由跳转页面的
+      // 第一种
+      this.$router.push("/home/shopping/shoppinginfo/" + id);
+      //   第二种
+      //   this.$router.push({ path: "/home/shopping/shoppinginfo/" + id });
+    }
+  }
+};
 </script>
 
 <style lang="" scope>
@@ -72,11 +110,14 @@ export default {};
   box-shadow: 0px 0px 2px rgba(1, 10, 27, 0.8);
   display: flex;
   flex-flow: column;
+  justify-content: space-between;
   min-height: 120px;
 }
 .list1 img {
   width: 120px;
-  height: 120px;
+  height: 138px;
+  position: relative;
+  left: 10px;
 }
 .list1 h1 {
   font-size: 15px;
@@ -105,5 +146,8 @@ export default {};
 }
 .bg {
   background-color: rgb(214, 211, 211);
+}
+.mint-button {
+  margin-top: 10px !important;
 }
 </style>

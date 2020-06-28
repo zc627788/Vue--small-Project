@@ -1,11 +1,8 @@
 <template>
   <div>
     <!-- 轮播图 -->
-    <mt-swipe :auto="4000">
-      <mt-swipe-item v-for="item in lunbo" :key="item.id">
-        <img class="swing" :src="item.img" />
-      </mt-swipe-item>
-    </mt-swipe>
+    <swipe :lunbo="lunbo" :iffull="true"></swipe>
+
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
         <router-link to="/home/newslist">
@@ -54,6 +51,7 @@
 </template>
 
 <script>
+import swipe from "../swipe/swipe.vue";
 export default {
   data() {
     return { lunbo: [] };
@@ -72,6 +70,9 @@ export default {
         }
       });
     }
+  },
+  components: {
+    swipe
   }
 };
 </script>
@@ -101,10 +102,6 @@ export default {
 img {
   width: 60px;
   height: 60px;
-}
-.swing {
-  width: 100%;
-  height: 100%;
 }
 </style>
 

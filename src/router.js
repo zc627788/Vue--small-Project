@@ -10,6 +10,11 @@ import Newinfo from './components/news/Newinfo.vue'
 import Photoes from './components/photoes/photoes.vue'
 import photoesinfo from './components/photoes/photoesinfo.vue'
 import shopping from './components/shopping/shopping.vue'
+import shoppinginfo from './components/shopping/shoppinginfo.vue'
+import shoppingcomment from './components/shopping/shoppingcomment.vue'
+import shoppingintroduct from './components/shopping/shoppingintroduct.vue'
+
+
 
 
 
@@ -57,6 +62,18 @@ var router = new VueRouter({
         {
             path: '/home/shopping/',
             component: shopping
+        },
+        {
+            path: '/home/shopping/shoppinginfo/:id',
+            component: shoppinginfo
+        },
+        {
+            path: '/home/shopping/shoppingintroduct/:id',
+            component: shoppingintroduct
+        },
+        {
+            path: '/home/shopping/shoppingcomment/:id',
+            component: shoppingcomment
         }
 
 

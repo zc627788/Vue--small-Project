@@ -2,6 +2,7 @@
   <div class="app-container">
     <!-- 顶部header区域 -->
     <mt-header fixed title="Vue项目"></mt-header>
+    <button v-if="flag" class="btn" @click="back()"><</button>
     <!-- 中间的路由 router-view -->
     <transition mode="out-in" appear>
       <router-view></router-view>
@@ -19,7 +20,7 @@
       </router-link>
       <router-link class="mui-tab-item-zzc" to="/shopcar">
         <span class="mui-icon mui-icon-extra mui-icon-extra-cart">
-          <span class="mui-badge">0</span>
+          <span class="mui-badge" id="badge">{{$store.getters.getAll}}</span>
         </span>
         <span class="mui-tab-label">购物车</span>
       </router-link>
@@ -32,6 +33,34 @@
 </template>
 
 <script>
+export default {
+  data() {
+    return {
+      flag: false
+    };
+  },
+  updated() {
+    this.btn();
+  },
+
+  methods: {
+    btn() {
+      if (
+        this.$route.fullPath == "/home" ||
+        this.$route.fullPath == "/VIP" ||
+        this.$route.fullPath == "/shopcar" ||
+        this.$route.fullPath == "/search"
+      ) {
+        this.flag = false;
+      } else {
+        this.flag = true;
+      }
+    },
+    back() {
+      this.$router.back();
+    }
+  }
+};
 </script>
 
 
@@ -87,5 +116,18 @@
 }
 .mint-header {
   z-index: 999999;
+}
+.btn {
+  position: fixed;
+  top: 0px;
+
+  height: 40px;
+  width: 45px;
+  border-radius: 10%;
+  z-index: 9999999;
+  background: #26a2ff;
+
+  border: none;
+  outline: none;
 }
 </style>
